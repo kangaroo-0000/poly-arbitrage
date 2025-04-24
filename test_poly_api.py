@@ -17,8 +17,6 @@ def get_active_open_markets(limit=30):
     print(f"📦 Total markets received: {len(data)}")
     return data
 
-def is_resolved(prices_float):
-    return all(price == 0.0 for price in prices_float)
 
 def scan_for_arbitrage(markets, show_raw=False):
     print(f"\n🔎 Scanning {len(markets)} active + open markets...\n")
@@ -58,11 +56,6 @@ def scan_for_arbitrage(markets, show_raw=False):
                 continue
 
             prices_float = list(map(float, prices))
-
-            if is_resolved(prices_float):
-                print("⚠️  Skipping: Market looks resolved (all prices = 0).")
-                skipped_count += 1
-                continue
 
             total = sum(prices_float)
 
